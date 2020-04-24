@@ -3,7 +3,6 @@ import { Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 
-
 import styles from './CountryPicker.module.css';
 
 import { fetchCountries } from '../../api';
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CountryPicker() {
+export default function CountryPicker({ handleCountryChange }) {
     const classes = useStyles();
     const [fetchedCountries, setFetchedCountries] = useState([]);
     const [country, setCountry] = useState('');
@@ -31,8 +30,8 @@ export default function CountryPicker() {
         fetchAPI();
     }, [setFetchedCountries]);
 
-    const handleOnChange = (event) => {
-        setCountry(event.target.value);
+    const handleOnChange = (e) => {
+        handleCountryChange(e.target.value);
     }
 
     return (
@@ -41,15 +40,10 @@ export default function CountryPicker() {
             <Select
                 labelId="demo-simple-select-label"
                 id="countries-select"
-                value={country}
                 onChange={handleOnChange}
             >
                 <MenuItem value="">Global</MenuItem>
-                {
-                    fetchedCountries.map((country) => {
-                        return <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>
-                    })
-                }
+                    {fetchedCountries.map((country) => <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>)}
             </Select>
         </FormControl>
     );

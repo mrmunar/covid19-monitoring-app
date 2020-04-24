@@ -61,7 +61,7 @@ export default function Chart({ data: { confirmed, deaths, recovered }, country 
 
     return (
         <div className={styles.container}>
-            {country ? barChart : lineChart}
+            {country && country !== 'global' ? barChart : lineChart}
         </div>
     );
 }

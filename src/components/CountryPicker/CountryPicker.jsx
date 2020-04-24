@@ -41,9 +41,10 @@ export default function CountryPicker({ handleCountryChange }) {
                 labelId="demo-simple-select-label"
                 id="countries-select"
                 onChange={handleOnChange}
+                defaultValue=""
             >
-                <MenuItem value="">Global</MenuItem>
-                    {fetchedCountries.map((country) => <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>)}
+                <MenuItem value="global">Global</MenuItem>
+                {fetchedCountries.map((country) => <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>)}
             </Select>
         </FormControl>
     );
